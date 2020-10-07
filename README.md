@@ -1,6 +1,7 @@
 # ActionText
 
-*  Repository for ActionText configuration.
+Repository for ActionText configuration.
 
-Wiki: 
+* Wiki: https://github.com/Guardark-Dev/ActionText/wiki
+
 You need help? Discord Support: https://discord.com/invite/cjt2yNH
