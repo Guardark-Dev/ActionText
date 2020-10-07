@@ -1,150 +1,80 @@
-# +------------------------------------------------------+ #
-# |                     informations                     | #
-# +------------------------------------------------------+ #
-# Spigot: https://www.spigotmc.org/resources/83646
-# Discord: https://discord.gg/cjt2yNH
 
-# If you encounter problems or have suggestions, 
-# do not hesitate to pass on my discord to send them to me ;)
-
-# +------------------------------------------------------+ #
-# |                       actions                        | #
-# +------------------------------------------------------+ #
+#Variable: 
+#%player% Represents the name of the player.
+#%answer% Represents the message sent by the player following an action asking for answers.
 
 actions:
-
-  Example:
-    permission: "act.test"
-    commands:
-    - "CONSOLE: tell %player% &8We will start the test"
-    - "PLAYER: act run start"
-
-  start:
-    permission: "act.test"
+  #[Required] Name of the action.
+  name:
+    #[Optional] Permission the player must have to run the action.
+    permission: "permission.example"
+    #[Optional] Sound played at the player.
+    #list of sounds: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
     sound: "ENTITY_VILLAGER_CELEBRATE"
+    #[Optional] Title sent to player.
     title:
-      - "&bPlease"
-      - "&breply to messages in the chat"
+      - "First phrase"
+      - "Second phrase"
+    #[Optional /requires: title] Duration in tick that remain the title (20 tick = 1 second)
     title-time: 40
-    text:
-      action-click: "SUGGEST: /action run example"
-      message:
-      - "&7+------&8[&3&lActionText&8]&7------+"
-      - "&bThank you for using this plugin !"
-      - ""
-      - "&bWhat's your name ?"
-      lore:
-      - "&6this  a test"
-      - "&6is"
-      - "&6a test"
-      answers:
-        name:
-          message:
-          - "  "
-          - "&6Hello &7[&6%answer%&7]"
-          - "&6&lDo you need help?"
-          option: "STOP"
-          answers:
-            error:
-              conditions: "CONTAINS: no&&yes, non&&oui"
-              commands:
-              - "MESSAGE: I didn't understand"
-              option: "REPEAT"
-            accept:
-              conditions: "EQUALS: yes, oui, ya"
-              sound: "ENTITY_VILLAGER_YES"
-              message:
-              - " "
-              - "&bI invite you to join my discord"
-              - "&byou would find support for the plugin."
-              - " "
-              commands:
-              - "CONSOLE: act run discord %player%"
-              option: "STOP"
-            deny:
-              conditions: "CONTAINS: no, non"
-              message:
-              - " "
-              - "&bOkay, if you ever have any suggestions for me,"
-              - "&bfeel free to join my discord ^-^"
-              - " "
-              commands:
-              - "CONSOLE: act run discord %player%"
-              option: "STOP"
-            default:
-              commands:
-              - "MESSAGE: &7I did not understand please answer &8[&7yes&8]&7 or &8[&7no&8]&7 please."
-
-
-
-  discord:
-    permission: "act.discord"
-    text:
-      action-click: "LINK: https://discord.gg/Eh39Sgp"
-      message:
-      - "&e+------&7[&6&lDISCORD LINK&7]&e------+"
-      - "&3&6Please hover your mouse over the message"
-      lore:
-      - "&bPlease click on the message to open the link"
-      - "&7[CLICK HERE]"
-
-
-  test:
-    #permissions that the player must possess to perform the action
-    permission: "act.permission"
-    #set of commands to execute to the player
-    #CONSOLE: run the command through the console
-    #PLAYER: execute the command through the player
-    #MESSAGE: sends a message to the player
+    #[Optional] Set of commands to execute to the player.
+      #CONSOLE: Run the command through the console.
+      #PLAYER: Execute the command through the player.
+      #MESSAGE: Sends a message to the player.
     commands:
-    - "CONSOLE: tell %player% &bThis is a test"
-    - "PLAYER: me &aThis is a test"
-    - "MESSAGE: &eThis is a test"
+    - "CONSOLE: command1 %player%"
+    - "PLAYER: command2"
+    - "MESSAGE: &bMessage"
     text:
-      #What to do when the player clicks on the message 
-      #RUN: run a command
-      #SUGGEST: suggest a command
-      #URL: open link
-      action-click: "SUGGEST: /command test"
-      #Message to sent to the player
+      #[Optional] Message to sent to the player
       message:
       - "Ligne 1"
       - "Ligne 2"
       - "Ligne 3"
-      #Lore display on the message
+      #[Optional /requires: message] What to do when the player clicks on the message 
+        #RUN: Run a command
+        #SUGGEST: Suggest a command
+        #URL: Open link
+      action-click: "SUGGEST: /a common command"
+      #[Optional /requires: message] Lore display on the message
       lore:
       - "lore 1"
       - "lore 2"
       - "..."
       - "lore 5"
-      #list of answers
-      #%answer% returns the player’s response
+      #[Optional] List of answers
       answers:
-        answer1:
-          #executes it if the player’s response contains yes and no, or if it contains repeat or help
-          conditions: "CONTAINS: no&&yes, repeat, help "
+        #[Required] Name of the answer
+        name:
+          #Check if the player’s response matches these arguments, else,
+          #the response does not run and the plugin will continue to scan the other possible responses.
+              #CONTAINS: Checks whether the response contains these arguments.
+              #EQUALS: Checks whether the answer is equal to one of these arguments
+          #Here we check if the answer does not contain [argument 1] or [argument 2 and argument 3] 
+          #or if it contains [argument 2,4 and 5]   
+          conditions: "CONTAINS: arg1, arg2&&arg3, arg2&&arg4&&arg5 "
+          #-----------------------------------------------------------------------------------
+          sound:
+          title:
+          title-time: 40
           commands:
-          - "MESSAGE: &brepeat"
-          #this option sends the text sent during the action (ligne 1, ligne 2, ligne 3)
+          text:
+            message:
+            action-click:
+            lore:
+          #-----------------------------------------------------------------------------------
+          #[Optional] option: To manage the analysis of the responses,
+          #to stop the analysis if the answer does not suit you or to finish the analysis.
+              #REPEAT: Reproduces the message and title of the previous action or answer.
+              #BREAK: Completes the analysis and waits for the next response from the player.
+              #STOP: finished the analysis of the answers.
+          #this option sends the message "lore 1, lore 2, ..., lore 5"
           option: "REPEAT"
-        answer0:
-          #executes it if the player’s response contains no or yes
-          conditions: "CONTAINS: no, yes"
-          commands:
-          - "MESSAGE: message1 "
-          - "MESSAGE: your answer is %answer% "
-          - "CONSOLE: tell %player% test"
-          #this option stops analyzing other responses until the player’s next response
-          option: "BREAK"
-        answer2:
-          #executes it if the player’s response equals finish or stop or arg
-          #you can also put a single argument conditions: "EQUALS: finish"
-          conditions: "EQUALS: finish, stop, arg"
-          commands:
-          - "MESSAGE: test finish"
-          #this option allows you to stop asking the player for answers
+        name2:
+          #executes it if the player’s response equals no or yes
+          conditions: "EQUALS: no, yes"
           option: "STOP"
-        answer78:
+        name3:
           #this response does not have a condition,
           #it will then execute at each response unless one of the previous
           #responses is valid and has a BREAK or STOP
