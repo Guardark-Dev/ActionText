@@ -43,43 +43,51 @@ actions:
       - "..."
       - "lore 5"
       #[Optional] List of answers
-      answers:
-        #[Required] Name of the answer
-        name:
-          #Check if the player’s response matches these arguments, else,
-          #the response does not run and the plugin will continue to scan the other possible responses.
-              #CONTAINS: Checks whether the response contains these arguments.
-              #EQUALS: Checks whether the answer is equal to one of these arguments
-          #Here we check if the answer does not contain [argument 1] or [argument 2 and argument 3] 
-          #or if it contains [argument 2,4 and 5]   
-          conditions: "CONTAINS: arg1, arg2&&arg3, arg2&&arg4&&arg5 "
-          #-----------------------------------------------------------------------------------
-          sound:
-          title:
-          title-time: 40
-          commands:
-          text:
-            message:
-            action-click:
-            lore:
-          #-----------------------------------------------------------------------------------
-          #[Optional] option: To manage the analysis of the responses,
+    answers:
+      #[Required] Name of the answer
+      name:
+        #Check if the player’s response matches these arguments, else,
+        #the response does not run and the plugin will continue to scan the other possible responses.
+            #CONTAINS: Checks whether the response contains these arguments.
+            #EQUALS: Checks whether the answer is equal to one of these arguments
+        #Here we check if the answer does not contain [argument 1] or [argument 2 and argument 3] 
+        #or if it contains [argument 2,4 and 5]   
+        conditions: "CONTAINS: arg1, arg2&&arg3, arg2&&arg4&&arg5 "
+        #[Optional] option: To manage the analysis of the responses,
           #to stop the analysis if the answer does not suit you or to finish the analysis.
               #REPEAT: Reproduces the message and title of the previous action or answer.
               #BREAK: Completes the analysis and waits for the next response from the player.
               #STOP: finished the analysis of the answers.
           #this option sends the message "lore 1, lore 2, ..., lore 5"
-          option: "REPEAT"
-        name2:
-          #executes it if the player’s response equals no or yes
-          conditions: "EQUALS: no, yes"
-          option: "STOP"
-        name3:
-          #this response does not have a condition,
-          #it will then execute at each response unless one of the previous
-          #responses is valid and has a BREAK or STOP
-          commands:
-          - "MESSAGE: message default"
+        option: "REPEAT"
+        #-----------------------------------------------------------------------------------
+        sound:
+        title:
+        title-time: 40
+        commands:
+        text:
+          message:
+          action-click:
+          lore:
+        #list of other responses to be analyzed if validated
+        answers:
+          name:
+          name2:
+            answers:
+              name1:
+              name2:
+          name3:
+        #-----------------------------------------------------------------------------------
+      name2:
+        #executes it if the player’s response equals no or yes
+        conditions: "EQUALS: no, yes"
+        option: "STOP"
+      name3:
+        #this response does not have a condition,
+        #it will then execute at each response unless one of the previous
+        #responses is valid and has a BREAK or STOP
+        commands:
+        - "MESSAGE: message default"
 
 
 
