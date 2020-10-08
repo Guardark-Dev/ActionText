@@ -17,6 +17,16 @@ actions:
       - "Second phrase"
     #[Optional /requires: title] Duration in tick that remain the title (20 tick = 1 second)
     title-time: 40
+    #[Optional BossBar sent to the player
+    boss-bar:
+      #[Required] titre of the boss bar
+      name: "&a&lStep phase"
+      #[Required] BossBar color / colour lists: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
+      color: "GREEN"
+      #[Required] Percentage of boss bar fill
+      percentage : 0
+      #[Required] boss bar duration in tick (0 = infinite duration)
+      time: 0
     #[Optional] Set of commands to execute to the player.
       #CONSOLE: Run the command through the console.
       #PLAYER: Execute the command through the player.
