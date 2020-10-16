@@ -25,6 +25,10 @@ actions:
       color: "GREEN"
       #[Optional] Percentage of boss bar fill
       percentage : 0
+      #[Optional: not include "percentage"] Represents the value of the current progressions (requires a placeholder variable)
+      percentage-min: "%player_health_rounded%"
+      #[Optional: not include "percentage"] Is the maximum value of the progressions (requires a placeholder variable or a number in "")
+      percentage-max: "%player_max_health_rounded%"
       #[Optional] boss bar duration in tick (0 = infinite duration)
       time: 0
       #[Optional] Defined whether the BossBar should be deleted by the next BossBar or put on hold.
