@@ -17,10 +17,34 @@ actions:
       - "Second phrase"
     #[Optional /requires: title] Duration in tick that remain the title (20 tick = 1 second)
     title-time: 40
-    #[Optional BossBar sent to the player
+    #[Optional] Scoreboard sent to the player
+    scoreboard:
+      #[Optional] titre of the Scoreboard
+      title: "&6Server Name"
+       #[Required] Scoreboard content lines
+      lignes:
+      - "_______________"
+      - ""
+      - "&2Money"
+      - "%vault_eco_balance%"
+      - ""
+      - "&3Rank"
+      - "%vault_rank%"
+      - ""
+      - "&8Website"
+      - "site.com"
+      - ""
+      - "&ePlayer time"
+      - "%player_time%"
+      - "_______________"
+      #[Optional] Scoreboard duration in tick (0 = infinite duration)
+      time: 200
+      #[Optional] Defined whether the Scoreboard should be deleted by the next Scoreboard or put on hold
+      removable: true
+    #[Optional] BossBar sent to the player
     boss-bar:
       #[Optional] titre of the boss bar
-      name: "&a&lStep phase"
+      name: "&c&lHealth point &r&c♥"
       #[Optional] BossBar color / colour lists: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
       color: "GREEN"
       #[Optional] Percentage of boss bar fill
@@ -29,7 +53,7 @@ actions:
       percentage-min: "%player_health_rounded%"
       #[Optional: not include "percentage"] Is the maximum value of the progressions (requires a placeholder variable or a number in "")
       percentage-max: "%player_max_health_rounded%"
-      #[Optional] boss bar duration in tick (0 = infinite duration)
+      #[Optional] BossBar duration in tick (0 = infinite duration)
       time: 0
       #[Optional] Defined whether the BossBar should be deleted by the next BossBar or put on hold.
       removable: true
